@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Brainwaves | Monitor en Vivo</title>
+    <link rel="stylesheet" href="stylesGraphics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="menu">
+  <ul>
+    <li><a href="pagina1.html">Home</a></li>
+    <li><a href="waves.html">Facts Waves</a></li>
+    <li><a href="graphics.html">Graphics</a></li>
+  </ul>
+</nav>
+
+<div class="main-container">
+    <h1 class="title-pink">Monitor en Tiempo Real</h1>
+    
+    <div class="bento-container">
+        <div class="card chart-card">
+            <canvas id="liveChart"></canvas>
+        </div>
+
+        <div class="card data-card">
+            <h3>Nivel Actual</h3>
+            <p id="live-value">0</p>
+            <span id="status-badge">Detectando...</span>
+        </div>
+    </div>
+</div>
+
+<script src="graphics.js"></script>
+</body>
+</html>
