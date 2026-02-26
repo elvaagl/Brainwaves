@@ -15,8 +15,8 @@ Este proyecto es un sistema de monitoreo en tiempo real que integra la captura d
 ### 1. Configuración de la Base de Datos (SQL)
 Antes de iniciar los programas, es necesario preparar el almacén de datos:
 1.  Abra su terminal de MariaDB o su gestor visual (como MySQL Workbench).
-2.  Ejecute el contenido del archivo `init_db.sql` que se encuentra en este repositorio.
-3.  Esto creará la base de datos `brainwaves_bd` y las tablas necesarias para el funcionamiento y la **funcionalidad extra** (análisis de estados).
+2.  Ejecute el contenido del archivo `baseBrainwaves.sql` que se encuentra en este repositorio.
+4.  Esto creará la base de datos `brainwaves_bd` y las tablas necesarias para el funcionamiento y la **funcionalidad extra** (análisis de estados).
 
 ### 2. Inicialización del Backend (Java)
 El backend cumple una doble función: lee los datos del sensor y actúa como servidor API para la web.
