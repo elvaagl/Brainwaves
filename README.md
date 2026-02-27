@@ -13,27 +13,42 @@ Este proyecto es un sistema de monitoreo en tiempo real que integra la captura d
 ## Instrucciones de Inicialización
 
 ### 1. Configuración de la Base de Datos (SQL)
-Antes de iniciar los programas, es necesario preparar el almacén de datos:
-1.  Abra su terminal de MariaDB o su gestor visual (como MySQL Workbench).
-2.  Ejecute el contenido del archivo `baseBrainwaves.sql` que se encuentra en este repositorio.
-4.  Esto creará la base de datos `brainwaves_bd` y las tablas necesarias para el funcionamiento y la **funcionalidad extra** (análisis de estados).
 
-### 2. Inicialización del Backend (Java)
+Antes de iniciar los programas, es necesario preparar el almacén de datos:
+
+1. Abra su terminal de MariaDB o su gestor visual (como MySQL Workbench).
+2. Ejecute el contenido del archivo `baseBrainwaves.sql` que se encuentra en este repositorio.
+3. Esto creará la base de datos `brainwaves_bd` y las tablas necesarias para el funcionamiento y la **funcionalidad extra** (análisis de estados).
+
+### 2. Inicialización del Sensor (C++)
+
+Es el primer componente que debe activarse para empezar a generar el flujo de datos:
+
+1. Abra una terminal en la carpeta del proyecto.
+2. Inicie el sensor ejecutando el comando:
+
+```bash
+./sensor
+```
+Mantenga esta terminal abierta para que el archivo datos_eeg.txt se actualice constantemente.
+
+---
+### 3. Inicialización del Backend (Java)
 El backend cumple una doble función: lee los datos del sensor y actúa como servidor API para la web.
 1.  Abra una terminal en la carpeta raíz del proyecto.
 2.  Compile el código fuente:
     ```bash
-    javac LectorEEG.java
+    javac -cp mariadb-java-client.jar LectorEEG.java
     ```
-3.  Ejecute el programa vinculando el conector de la base de datos:
+3.  Ejecute el programa llamando a la clase principal (sin la extensión .java): 
     * **En Linux/M**
         ```bash
         java -cp .:mariadb-java-client.jar LectorEEG
         ```
    
-4.  Verificará que aparece el mensaje: `--> Servidor Web listo en http://localhost:8080/api/brain/status`.
+5.  Verificará que aparece el mensaje: `--> Servidor Web listo en http://localhost:8080/api/brain/status`.
 
-### 3. Inicialización del Frontend (Web)
+### 4. Inicialización del Frontend (Web)
 La interfaz es estática y no requiere un servidor de node.js o similar.
 1.  Localice el archivo `pagina1.html`o`waves.html`o`graphics.html` en la carpeta del proyecto.
 2.  Haga clic derecho y seleccione **"Abrir con Firefox"** (o su navegador preferido).
