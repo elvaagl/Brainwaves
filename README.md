@@ -60,7 +60,7 @@ La interfaz es estática y no requiere un servidor de node.js o similar.
 * **Frontend:** `pagina1.html`, `stylesHome.css`, `home.js`, `waves.html`, `stylesFacts.css`, `facts.js`, `graphics.html`, `stylesGraphics.css`, `graphics.js` .
 * **Backend:** `LectorEEG.java` .
 * **Base de Datos:** MariaDB (Tablas de lecturas y registros).
-* **Sensor:** `./sensor`,`datos_eeg.txt`  .
+* **Sensor:** `sensor.cpp`,`datos_eeg.txt`  .
 
 ## Funcionalidad Extra
 Se ha implementado una **Lógica de Análisis de Datos** directamente en el Backend. El servidor Java no solo entrega el valor bruto del sensor, sino que procesa el nivel de intensidad en tiempo real, clasificándolo en estados (ej. "Relajado", "Actividad Alta") y asignando colores dinámicos que el Frontend interpreta automáticamente.
