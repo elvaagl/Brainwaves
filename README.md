@@ -1,66 +1,127 @@
-# Monitor de Ondas Cerebrales - Brainwaves Project
+# 🧠 Brainwaves
 
-Este proyecto es un sistema de monitoreo en tiempo real que integra la captura de datos (simulada por C++), el almacenamiento y procesamiento en Java, y una interfaz visual moderna.
-
-## Requisitos Previos
-* **Java JDK 17** o superior.
-* **MariaDB** o MySQL instalado y corriendo.
-* **Conector JDBC de MariaDB** (`mariadb-java-client.jar`) en la raíz del proyecto.
-* Un navegador web (se recomienda **Firefox**).
+Sistema de monitoreo de actividad bioeléctrica en tiempo real. Captura señales EEG/ECG con un sensor AD8232 + ESP32, las procesa en un backend Java y las visualiza en una interfaz React.
 
 ---
 
-## Instrucciones de Inicialización
+## Stack
 
-### 1. Configuración de la Base de Datos (SQL)
+| Capa | Tecnología |
+|------|-----------|
+| Hardware | ESP32 DEVKIT V1 + AD8232 |
+| Sensor | C++ (threads, mutex, serial) |
+| Backend | Java (HTTP server, SSE, MariaDB) |
+| Base de datos | MariaDB 10.11 |
+| Frontend | React + Vite + Chart.js |
+| Infraestructura | Docker Compose |
 
-Antes de iniciar los programas, es necesario preparar el almacén de datos:
+---
 
-1. Abra su terminal de MariaDB o su gestor visual (como MySQL Workbench).
-2. Ejecute el contenido del archivo `baseBrainwaves.sql` que se encuentra en este repositorio.
-3. Esto creará la base de datos `brainwaves_bd` y las tablas necesarias para el funcionamiento y la **funcionalidad extra** (análisis de estados).
+## Arquitectura
+ESP32 → sensor.cpp → /data/datos_eeg.txt → LectorEEG.java → MariaDB → React (SSE)
 
-### 2. Inicialización del Sensor (C++)
+---
 
-Es el primer componente que debe activarse para empezar a generar el flujo de datos:
+## Requisitos
 
-1. Abra una terminal en la carpeta del proyecto.
-2. Inicie el sensor ejecutando el comando:
+- Docker y Docker Compose
+- VirtualBox con Xubuntu (o Linux nativo)
+- ESP32 DEVKIT V1 + sensor AD8232
 
+---
+
+## Instrucciones de arranque
+
+### 1. Clonar el repositorio
 ```bash
-./sensor
+git clone https://github.com/elvaagl/Brainwaves.git
+cd Brainwaves
 ```
-Mantenga esta terminal abierta para que el archivo datos_eeg.txt se actualice constantemente.
+
+### 2. Levantar los contenedores
+```bash
+docker compose up -d
+```
+
+### 3. Conectar el ESP32 por USB
+En VirtualBox → Dispositivos → USB → seleccionar ESP32.
+
+### 4. Dar permisos al puerto serial
+```bash
+sudo chmod 666 /dev/ttyUSB0
+docker compose restart sensor
+```
+
+### 5. Verificar que el sensor lee datos
+```bash
+docker logs brainwaves_sensor --tail 10
+```
+
+### 6. Abrir la app
+http://localhost
 
 ---
-### 3. Inicialización del Backend (Java)
-El backend cumple una doble función: lee los datos del sensor y actúa como servidor API para la web.
-1.  Abra una terminal en la carpeta raíz del proyecto.
-2.  Compile el código fuente:
-    ```bash
-    javac -cp mariadb-java-client.jar LectorEEG.java
-    ```
-3.  Ejecute el programa llamando a la clase principal (sin la extensión .java): 
-    * **En Linux/M**
-        ```bash
-        java -cp .:mariadb-java-client.jar LectorEEG
-        ```
-   
-5.  Verificará que aparece el mensaje: `--> Servidor Web listo en http://localhost:8080/api/brain/status`.
 
-### 4. Inicialización del Frontend (Web)
-La interfaz es estática y no requiere un servidor de node.js o similar.
-1.  Localice el archivo `pagina1.html`o`waves.html`o`graphics.html` en la carpeta del proyecto.
-2.  Haga clic derecho y seleccione **"Abrir con Firefox"** (o su navegador preferido).
-3.  La gráfica comenzará a recibir los datos automáticamente desde el servidor Java mediante peticiones asíncronas (Fetch API).
+## Estructura del proyecto
+brainwaves-main/
+├── docker-compose.yml
+├── backend/src/
+│   ├── LectorEEG.java          ← main, pipe, arranque
+│   ├── BrainController.java    ← /api/brain/, SSE, música
+│   ├── AuthService.java        ← /api/auth/login y register
+│   ├── Validator.java          ← validaciones y SHA-256
+│   ├── PacientesController.java ← /api/pacientes/, historial canciones
+│   ├── ExportController.java   ← /api/export/* CSV
+│   └── SessionController.java  ← /api/session/activa
+├── sensor/src/
+│   └── sensor.cpp              ← threads, mutex, serial, señales SO
+├── frontend/login-app/src/
+│   ├── App.jsx                 ← rutas
+│   ├── Home.jsx                ← dashboard paciente
+│   ├── HomeMedico.jsx          ← dashboard médico
+│   ├── Waves.jsx               ← contenido educativo (Facts Waves)
+│   ├── PanelClinico.jsx        ← panel médico con datos reales
+│   ├── Graphics.jsx            ← monitor tiempo real + historial canciones
+│   └── components/loginSignup/ ← login y registro
+└── database/
+└── baseBrainwaves.sql
 
 ---
 
-## Componentes del Proyecto
-* **Frontend:** `pagina1.html`, `stylesHome.css`, `home.js`, `waves.html`, `stylesFacts.css`, `facts.js`, `graphics.html`, `stylesGraphics.css`, `graphics.js` .
-* **Backend:** `LectorEEG.java` .
-* **Base de Datos:** MariaDB (Tablas de lecturas y registros).
-* **Sensor:** `sensor.cpp`,`datos_eeg.txt`  .
+## Endpoints del backend (puerto 8080)
 
-## Funcionalidad Extra
-Se ha implementado una **Lógica de Análisis de Datos** directamente en el Backend. El servidor Java no solo entrega el valor bruto del sensor, sino que procesa el nivel de intensidad en tiempo real, clasificándolo en estados (ej. "Relajado", "Actividad Alta") y asignando colores dinámicos que el Frontend interpreta automáticamente.
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | /api/auth/login | Iniciar sesión |
+| POST | /api/auth/register | Registro de usuario |
+| GET | /api/brain/status | Estado actual del sensor |
+| GET | /api/brain/recommendation | Onda, estado y canción recomendada |
+| GET | /api/brain/stream | SSE en tiempo real |
+| GET | /api/music/recommendation | Recomendación via Last.fm |
+| GET | /api/music/historial?id=X | Historial de canciones del paciente |
+| GET | /api/pacientes | Lista de pacientes con última lectura |
+| GET | /api/pacientes/historial?id=X | Últimas 20 lecturas EEG |
+| POST | /api/session/activa | Registrar usuario activo en el sensor |
+| DELETE | /api/session/activa | Cerrar sesión activa |
+| GET | /api/export/pacientes | Exportar pacientes CSV |
+| GET | /api/export/lecturas | Exportar lecturas CSV |
+
+---
+
+## Conceptos de Sistemas Operativos implementados
+
+- **Threads** — `std::thread` para lector serial y escritor de archivo
+- **Mutex** — `std::mutex` + `std::lock_guard` para proteger la cola compartida
+- **IPC** — volumen Docker compartido como canal entre contenedores
+- **Señales del SO** — `SIGINT` y `SIGTERM` para cierre limpio
+- **`std::atomic`** — flag thread-safe de parada
+- **`AtomicInteger`** — `usuarioActivoId` compartido entre hilos SSE
+- **Variables de ambiente** — configuración externalizada con `System.getenv()`
+- **Buffer** — `std::queue` como buffer productor-consumidor
+
+---
+
+## Credenciales por defecto
+
+- Médico: `doctor@brainwaves.com` / `Doctor123`
+- Cuentas `@brainwaves.com` → rol médico automático
