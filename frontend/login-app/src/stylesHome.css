@@ -1,0 +1,51 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #ffc0cb;
+}
+
+/* Menu */
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--rose);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-size: 60px;
+  font-family: "Comic Sans MS", cursive;
+  color: black;
+  margin-top: 0px;
+}
+
+/* Image slider container */
+.image-box {
+  display: flex;
+  gap: 30px;
+  overflow: hidden;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-box img {
+  width: 220px;
+}
+
+.slider {
+  display: flex;
+  gap: 30px;
+}

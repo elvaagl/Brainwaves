@@ -1,0 +1,268 @@
+/* HomeMedico.css */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.hm-page {
+  min-height: 100vh;
+  background: #ffc0cb;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* ── Navbar ──────────────────────────────────────── */
+.hm-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background: #fff;
+  border-bottom: 0.5px solid #ffd6e0;
+}
+
+.hm-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6b8a;
+}
+
+.hm-links {
+  display: flex;
+  gap: 32px;
+}
+
+.hm-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.hm-link:hover { color: #ff6b8a; }
+.hm-link.active { color: #ff6b8a; }
+
+.hm-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hm-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffeef2;
+  color: #ff6b8a;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffd6e0;
+}
+
+.hm-nombre {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+.hm-rol-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #ffeef2;
+  color: #ff6b8a;
+  border: 1px solid #ffd6e0;
+}
+
+.hm-logout {
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 0.5px solid #eee;
+  background: transparent;
+  transition: color 0.2s;
+}
+
+.hm-logout:hover {
+  color: #ff6b8a;
+  border-color: #ffd6e0;
+}
+
+/* ── Main ────────────────────────────────────────── */
+.hm-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 40px;
+}
+
+/* ── Saludo ──────────────────────────────────────── */
+.hm-greeting {
+  margin-bottom: 28px;
+}
+
+.hm-greeting h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.hm-greeting p {
+  font-size: 15px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1d9e75;
+  display: inline-block;
+  animation: hm-pulse 2s infinite;
+}
+
+@keyframes hm-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Stats ───────────────────────────────────────── */
+.hm-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.hm-stat {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #ffe0e8;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: border-color 0.2s, transform 0.1s;
+}
+
+.hm-stat:hover {
+  border-color: #ff6b8a;
+  transform: translateY(-2px);
+}
+
+.hm-stat.hm-stat-alerta {
+  border-color: #f5c6c6;
+}
+
+.hm-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hm-stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hm-stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.2;
+}
+
+.hm-stat-num.hm-num-alerta {
+  color: #e24b4a;
+}
+
+.hm-stat-label {
+  font-size: 12px;
+  color: #999;
+  font-weight: 500;
+}
+
+/* ── Cards ───────────────────────────────────────── */
+.hm-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.hm-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #ffe0e8;
+  padding: 24px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.1s;
+}
+
+.hm-card:hover {
+  border-color: #ff6b8a;
+  transform: translateY(-2px);
+}
+
+.hm-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.hm-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.hm-card p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.hm-card-arrow {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── Banner ──────────────────────────────────────── */
+.hm-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff0f3;
+  border: 1px solid #ffd6e0;
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.hm-banner p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.hm-banner strong {
+  color: #ff6b8a;
+}

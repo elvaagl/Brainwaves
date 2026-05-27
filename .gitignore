@@ -1,0 +1,23 @@
+# Node
+frontend/login-app/node_modules/
+frontend/login-app/dist/
+
+# Java compilado
+backend/src/*.class
+
+# Logs
+*.log
+/var/log/
+
+# Datos del sensor
+/data/
+
+# Docker volúmenes
+db_data/
+
+# Variables de ambiente sensibles
+.env
+
+# OS
+.DS_Store
+Thumbs.db

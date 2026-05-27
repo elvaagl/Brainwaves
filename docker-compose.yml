@@ -1,0 +1,97 @@
+services:
+ 
+  # ─── Base de Datos ───────────────────────────────────────────
+  db:
+    image: mariadb:10.11
+    container_name: brainwaves_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: brainwaves_bd
+      MYSQL_USER: linuxdummy
+      MYSQL_PASSWORD: linux
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/baseBrainwaves.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3307:3306"
+    networks:
+      - brainwaves_net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+ 
+  # ─── Sensor ESP32 ──────────────────────────────────────────────
+  sensor:
+    build:
+      context: ./sensor
+      dockerfile: Dockerfile
+    container_name: brainwaves_sensor
+    restart: always
+    volumes:
+      - eeg_data:/data
+    command: sh -c "> /data/datos_eeg.txt && ./sensor"
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    privileged: true
+    networks:
+      - brainwaves_net
+    depends_on:
+      - db
+    environment:
+      SERIAL_PORT: /dev/ttyUSB0
+      BAUD_RATE: "115200"
+      PIPE_PATH: /data/datos_eeg.txt
+      MAX_BUFFER: "100"
+ 
+  # ─── Backend Java ─────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: brainwaves_backend
+    restart: always
+    ports:
+      - "8080:8080"
+      - "2222:22"
+      - "8081:8081"
+    volumes:
+      - eeg_data:/data
+    networks:
+      - brainwaves_net
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: brainwaves_bd
+      DB_USER: linuxdummy
+      DB_PASS: linux
+      PIPE_PATH: /data/datos_eeg.txt
+      LASTFM_API_KEY: 9d3546d8b8a289fad6871592c6bb1268
+      LASTFM_SECRET: 63f3ac2721f3a94607be85aad448a1d1
+ 
+  # ─── Frontend (Nginx) ─────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: brainwaves_frontend
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - brainwaves_net
+    depends_on:
+      - backend
+ 
+volumes:
+  db_data:
+  eeg_data:
+ 
+networks:
+  brainwaves_net:
+    driver: bridge

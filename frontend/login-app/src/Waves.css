@@ -1,0 +1,309 @@
+/* ══════════════════════════════════════════════════
+   BASE
+══════════════════════════════════════════════════ */
+.waves-page { min-height: 100vh; background: #ffc0cb; font-family: Inter, system-ui, sans-serif; transition: background 0.3s; }
+.waves-page.dark { background: #222; }
+.waves-page.dark .wave-card { background: #333; border-color: #444; }
+.waves-page.dark h1, .waves-page.dark h2, .waves-page.dark p, .waves-page.dark .meta-value { color: #fff; }
+.waves-page.dark .home-nav { background: #1a1a1a; border-color: #333; }
+.waves-page.dark .nav-logo { color: #ff6b8a; }
+.waves-page.dark .nav-link { color: #aaa; }
+.waves-page.dark .disclaimer { background: #333; border-color: #555; }
+
+/* ══════════════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════════════ */
+.home-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: #fff; border-bottom: 0.5px solid #ffd6e0; }
+.nav-logo { font-size: 18px; font-weight: 700; color: #ff6b8a; }
+.nav-links { display: flex; gap: 32px; }
+.nav-link { font-size: 14px; font-weight: 500; color: #aaa; cursor: pointer; transition: color 0.2s; }
+.nav-link:hover, .nav-link.active { color: #ff6b8a; }
+.nav-user { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: #ffeef2; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #ff6b8a; border: 1.5px solid #ffd6e0; }
+.nav-nombre { font-size: 14px; color: #555; font-weight: 500; }
+.logout-btn { font-size: 13px; color: #aaa; cursor: pointer; padding: 6px 14px; border-radius: 20px; border: 0.5px solid #eee; background: transparent; }
+.logout-btn:hover { color: #ff6b8a; border-color: #ffd6e0; }
+.mode-btn { font-size: 13px; cursor: pointer; padding: 6px 14px; border-radius: 20px; border: 0.5px solid #eee; background: transparent; color: #555; }
+
+/* ══════════════════════════════════════════════════
+   LAYOUT PRINCIPAL
+══════════════════════════════════════════════════ */
+.waves-main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+.waves-header { text-align: center; margin-bottom: 32px; }
+.waves-header h1 { font-size: 28px; font-weight: 700; color: #333; margin-bottom: 8px; }
+.waves-header p { font-size: 15px; color: #555; }
+
+/* ══════════════════════════════════════════════════
+   HERO IMAGEN CEREBRO
+══════════════════════════════════════════════════ */
+.brain-container { background: #fff; border-radius: 20px; border: 0.5px solid #ffd6e0; overflow: hidden; margin-bottom: 24px; }
+.brain-hero-img { width: 100%; height: 320px; object-fit: cover; object-position: center top; display: block; border-radius: 20px 20px 0 0; }
+.brain-caption { text-align: center; font-size: 12px; color: #ccc; padding: 8px 0 16px; }
+
+/* ══════════════════════════════════════════════════
+   DISCLAIMER
+══════════════════════════════════════════════════ */
+.disclaimer { display: flex; align-items: flex-start; gap: 12px; background: #fff8f0; border: 1px solid #ffd6a0; border-radius: 12px; padding: 16px 20px; margin-bottom: 32px; }
+.disclaimer-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+.disclaimer p { font-size: 13px; color: #666; line-height: 1.6; margin: 0; }
+.disclaimer strong { color: #333; }
+
+/* ══════════════════════════════════════════════════
+   CARDS DE ONDAS
+══════════════════════════════════════════════════ */
+.waves-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+.wave-card { background: #fff; border-radius: 16px; border: 0.5px solid #ffd6e0; display: flex; overflow: hidden; }
+
+/* Imagen más grande: 260px */
+.wave-card-img { width: 260px; flex-shrink: 0; }
+.wave-card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.wave-card-info { padding: 24px; flex: 1; }
+.wave-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.wave-card-header h2 { font-size: 18px; font-weight: 700; color: #333; margin-bottom: 6px; }
+.wave-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.estado-tag { font-size: 12px; color: #aaa; background: #f5f5f5; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+.wave-desc { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 16px; }
+.wave-meta { display: flex; gap: 24px; }
+.meta-item { display: flex; flex-direction: column; gap: 2px; }
+.meta-label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+.meta-value { font-size: 13px; color: #333; font-weight: 600; }
+
+/* ══════════════════════════════════════════════════
+   REFERENCIAS
+══════════════════════════════════════════════════ */
+.wave-ref {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.wave-ref a {
+  font-size: 12px;
+  color: #ff6b8a;
+  text-decoration: none;
+  background: #ffeef2;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 0.5px solid #ffd6e0;
+  transition: background 0.2s, color 0.2s;
+}
+.wave-ref a:hover {
+  background: #ff6b8a;
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════════════
+   SECCIÓN LÓBULOS — diseño especial
+══════════════════════════════════════════════════ */
+.lobulos-section {
+  background: #fff;
+  border-radius: 20px;
+  border: 0.5px solid #ffd6e0;
+  padding: 32px;
+  margin: 32px 0;
+}
+.lobulos-header {
+  margin-bottom: 28px;
+}
+.lobulos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.lobulo-card {
+  background: #fafafa;
+  border-radius: 14px;
+  border: 0.5px solid #f0f0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.2s;
+}
+.lobulo-card:hover {
+  box-shadow: 0 4px 16px rgba(255, 107, 138, 0.1);
+}
+.lobulo-card-wide {
+  grid-column: 1 / -1;
+}
+.lobulo-icon {
+  font-size: 24px;
+}
+.lobulo-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+.lobulo-card p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+.lobulo-card p strong {
+  color: #444;
+}
+.lobulo-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-top: 4px;
+}
+/* Dark mode lóbulos */
+.waves-page.dark .lobulos-section {
+  background: #2a2a2a;
+  border-color: #444;
+}
+.waves-page.dark .lobulo-card {
+  background: #333;
+  border-color: #444;
+}
+.waves-page.dark .lobulo-card h3 {
+  color: #fff;
+}
+.waves-page.dark .lobulo-card p {
+  color: #ccc;
+}
+
+/* ══════════════════════════════════════════════════
+   LÍNEA DE TIEMPO — Historia del EEG
+══════════════════════════════════════════════════ */
+.timeline-section {
+  margin: 48px 0 40px;
+}
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.section-sub {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 36px;
+}
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #ffd6e0, #ff6b8a, #ffd6e0);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 calc(50% + 28px) 24px 0;
+  position: relative;
+}
+.timeline-item.right {
+  justify-content: flex-start;
+  padding: 0 0 24px calc(50% + 28px);
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  width: 14px;
+  height: 14px;
+  background: #ff6b8a;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 3px #ffd6e0;
+  z-index: 1;
+}
+.timeline-card {
+  background: #fff;
+  border: 0.5px solid #ffd6e0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  max-width: 320px;
+  box-shadow: 0 2px 12px rgba(255, 107, 138, 0.08);
+}
+.timeline-year {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #ff6b8a;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.timeline-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+.timeline-fact {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+.waves-page.dark .timeline-card { background: #333; border-color: #444; }
+.waves-page.dark .timeline-name, .waves-page.dark .timeline-fact { color: #eee; }
+.waves-page.dark .section-title, .waves-page.dark .section-sub { color: #eee; }
+
+/* ══════════════════════════════════════════════════
+   CTA GRAPHICS
+══════════════════════════════════════════════════ */
+.cta-graphics-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #ff6b8a 0%, #ff4d6d 100%);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(255, 107, 138, 0.3);
+}
+.cta-graphics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 107, 138, 0.4);
+}
+.cta-icon { font-size: 36px; flex-shrink: 0; }
+.cta-text h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.cta-text p { font-size: 14px; color: rgba(255,255,255,0.85); margin: 0; line-height: 1.5; }
+.cta-arrow { margin-left: auto; font-size: 24px; color: #fff; font-weight: 300; }
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .wave-card { flex-direction: column; }
+  .wave-card-img { width: 100%; height: 200px; }
+  .lobulos-grid { grid-template-columns: 1fr; }
+  .lobulo-card-wide { grid-column: 1; }
+  .timeline::before { left: 16px; }
+  .timeline-item,
+  .timeline-item.right {
+    padding: 0 0 20px 44px;
+    justify-content: flex-start;
+  }
+  .timeline-dot { left: 16px; }
+  .timeline-card { max-width: 100%; }
+  .cta-graphics-card { flex-wrap: wrap; }
+  .home-nav { padding: 14px 20px; }
+  .nav-links { gap: 16px; }
+}

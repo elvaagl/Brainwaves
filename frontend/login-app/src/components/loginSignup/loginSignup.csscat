@@ -1,0 +1,8 @@
+
+.mensaje {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ff6b8a;
+  font-weight: 600;
+} /home/linuxdummy/brainwaves/brainwaves-main/backend/.env

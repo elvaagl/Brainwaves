@@ -1,0 +1,19 @@
+
+/* Semáforo */
+.semaforo {
+  font-size: 3em;
+  margin: 10px 0;
+}
+
+/* Link de canción Last.fm */
+.cancion-link {
+  color: var(--rose);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.cancion-link:hover {
+  text-decoration: underline;
+  color: var(--dark);
+}

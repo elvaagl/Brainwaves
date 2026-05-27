@@ -1,0 +1,483 @@
+/* Doctor.css — Panel Clínico Brainwaves */
+
+/* Reutiliza .home-nav, .nav-logo, .nav-links, .nav-link,
+   .nav-user, .avatar, .nav-nombre, .logout-btn de Home.css
+   ─────────────────────────────────────────────────────────
+   Asegúrate de importar también Home.css en App.jsx o en Doctor.jsx
+   si quieres compartir la navbar, o duplica los estilos de nav aquí. */
+
+/* Importamos los estilos de Home para reutilizar navbar */
+@import "./Home.css";
+
+.doctor-page {
+  min-height: 100vh;
+  background: #ffc0cb;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.doctor-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 24px 40px;
+}
+
+/* ── Header ─────────────────────────────────────── */
+.doctor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.doctor-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.doctor-header p {
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1d9e75;
+  display: inline-block;
+  margin-right: 2px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.btn-export {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ff6b8a;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn-export:hover {
+  background: #ff4d6d;
+  transform: scale(1.02);
+}
+
+/* ── Layout ─────────────────────────────────────── */
+.doctor-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Filtros ─────────────────────────────────────── */
+.filtros-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.filtro-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1.5px solid #ffe0e8;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  color: #777;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filtro-btn:hover {
+  border-color: #ff6b8a;
+  color: #ff6b8a;
+}
+
+.filtro-btn.active {
+  background: #ff6b8a;
+  border-color: #ff6b8a;
+  color: #fff;
+}
+
+.filtro-btn.alerta.active {
+  background: #e24b4a;
+  border-color: #e24b4a;
+}
+
+.filtro-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.filtro-dot.alerta {
+  background: #e24b4a;
+}
+
+/* ── Tabla ──────────────────────────────────────── */
+.tabla-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #ffe0e8;
+  overflow: hidden;
+}
+
+.tabla-pacientes {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-pacientes thead tr {
+  border-bottom: 1px solid #ffeef2;
+}
+
+.tabla-pacientes th {
+  font-size: 12px;
+  font-weight: 600;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.tabla-row {
+  border-bottom: 0.5px solid #fff5f7;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tabla-row:last-child {
+  border-bottom: none;
+}
+
+.tabla-row:hover {
+  background: #fff8fa;
+}
+
+.tabla-row.selected {
+  background: #fff0f4;
+}
+
+.tabla-row.row-alerta {
+  border-left: 3px solid #e24b4a;
+}
+
+.tabla-row td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Celda paciente */
+.paciente-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tabla-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffeef2;
+  color: #ff6b8a;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffd6e0;
+  flex-shrink: 0;
+}
+
+.paciente-nombre {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.paciente-email {
+  display: block;
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* Chip de onda */
+.onda-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.onda-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Celdas numéricas */
+.valor-cell {
+  font-weight: 700;
+  color: #333;
+  font-size: 15px;
+}
+
+.lectura-cell {
+  color: #999;
+  font-size: 13px;
+}
+
+/* Badge de alerta */
+.alerta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fcebeb;
+  color: #e24b4a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 50px;
+}
+
+/* ── Panel detalle derecho ───────────────────────── */
+.doctor-right {
+  position: sticky;
+  top: 24px;
+}
+
+.detalle-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #ffe0e8;
+  padding: 24px;
+}
+
+.detalle-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ffeef2;
+}
+
+.detalle-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffeef2;
+  color: #ff6b8a;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffd6e0;
+  flex-shrink: 0;
+}
+
+.detalle-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.detalle-header span {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Marcadores clínicos */
+.marcadores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.marcador {
+  background: #faf9fb;
+  border-radius: 12px;
+  padding: 14px;
+  border: 0.5px solid #f0eef5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.marcador-label {
+  font-size: 11px;
+  color: #bbb;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.marcador-valor {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.marcador-valor.small {
+  font-size: 14px;
+}
+
+.alerta-text { color: #e24b4a; }
+.ok-text     { color: #1d9e75; }
+
+/* Historial */
+.historial-section {
+  margin-bottom: 20px;
+}
+
+.historial-section h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.historial-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.historial-lista::-webkit-scrollbar {
+  width: 4px;
+}
+
+.historial-lista::-webkit-scrollbar-track {
+  background: #ffeef2;
+  border-radius: 4px;
+}
+
+.historial-lista::-webkit-scrollbar-thumb {
+  background: #ffc0cb;
+  border-radius: 4px;
+}
+
+.historial-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #faf9fb;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.historial-ts {
+  color: #aaa;
+  font-weight: 500;
+  min-width: 40px;
+}
+
+.historial-onda {
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.historial-valor {
+  font-weight: 700;
+  color: #333;
+  min-width: 35px;
+}
+
+.historial-diag {
+  color: #777;
+  flex: 1;
+}
+
+/* Botón exportar individual */
+.btn-export-paciente {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px;
+  border-radius: 12px;
+  border: 1.5px solid #ffd6e0;
+  background: transparent;
+  color: #ff6b8a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-export-paciente:hover {
+  background: #fff0f3;
+  border-color: #ff6b8a;
+}
+
+/* Estado vacío del panel derecho */
+.detalle-empty {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px dashed #ffd6e0;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.detalle-empty p {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* Badge de rol en navbar (si no está en Home.css) */
+.nav-rol-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #ffeef2;
+  color: #ff6b8a;
+  border: 1px solid #ffd6e0;
+}

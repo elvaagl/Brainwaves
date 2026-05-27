@@ -1,0 +1,9 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.app-background {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 50%, #ff9eb5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

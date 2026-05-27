@@ -1,0 +1,299 @@
+.graphics-page {
+  min-height: 100vh;
+  background: #ffc0cb;
+  font-family: 'Lato', sans-serif;
+}
+
+.graphics-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.graphics-header {
+  margin-bottom: 32px;
+}
+
+.graphics-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 6px;
+}
+
+.graphics-header p {
+  color: #888;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Bento grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.bento-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 2px 16px rgba(255, 77, 109, 0.08);
+  border: 1.5px solid #f0e0e4;
+  transition: box-shadow 0.2s;
+}
+
+.bento-card:hover {
+  box-shadow: 0 4px 24px rgba(255, 77, 109, 0.15);
+}
+
+.bento-chart {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.bento-status {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bento-music {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #aaa;
+  margin-bottom: 16px;
+}
+
+/* Gráfica */
+.chart-wrap {
+  height: 300px;
+  position: relative;
+}
+
+/* Semáforo */
+.semaforo-big {
+  font-size: 3.5rem;
+  margin: 8px 0;
+}
+
+.live-value {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 4px 0;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 8px 0;
+}
+
+.onda-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.onda-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.estado-text {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Música */
+.music-subtitle {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin: 0 0 16px;
+}
+
+.music-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1.5px solid;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.music-link:hover {
+  opacity: 0.85;
+  transform: scale(1.01);
+}
+
+.music-icon {
+  font-size: 1.5rem;
+}
+
+.music-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.music-artist {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.music-arrow {
+  margin-left: auto;
+  font-size: 1.2rem;
+}
+
+.music-loading {
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .bento-chart, .bento-status, .bento-music {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+.nav-rol-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #ffeef2;
+  color: #ff6b8a;
+  border: 1px solid #ffd6e0;
+}
+/* ══════════════════════════════════════════════════
+   BENTO HISTORIAL DE CANCIONES
+   Agregar al final de Graphics.css
+══════════════════════════════════════════════════ */
+.bento-historial {
+  grid-column: 1 / -1; /* ancho completo */
+}
+
+.historial-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 24px 0;
+  color: #bbb;
+}
+.historial-empty span {
+  font-size: 14px;
+  font-weight: 600;
+}
+.historial-empty p {
+  font-size: 12px;
+  color: #ccc;
+  margin: 0;
+  text-align: center;
+}
+
+.historial-canciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.historial-canciones-lista::-webkit-scrollbar {
+  width: 4px;
+}
+.historial-canciones-lista::-webkit-scrollbar-thumb {
+  background: #ffd6e0;
+  border-radius: 4px;
+}
+
+.historial-cancion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 0.5px solid #f0f0f0;
+  transition: background 0.15s;
+}
+.historial-cancion-item:hover {
+  background: #fff5f7;
+}
+
+.hc-onda {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hc-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.hc-nombre {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+a.hc-nombre:hover {
+  color: #ff6b8a;
+  text-decoration: underline;
+}
+.hc-artista {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.hc-fecha {
+  font-size: 11px;
+  color: #ccc;
+  flex-shrink: 0;
+}
+
